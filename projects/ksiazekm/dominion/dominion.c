@@ -697,7 +697,7 @@ int baron(struct gameState* state, int choice1) {
 
 }
 
-int minion(struct gameState* state, int handPos) {
+int minion(struct gameState* state, int handPos, int choice1, int choice2) {
 	int currentPlayer = whoseTurn(state);
 	//+1 action
 	state->numActions++;
@@ -707,7 +707,7 @@ int minion(struct gameState* state, int handPos) {
 
 	if (choice1)		//+2 coins
 	{
-		state->coins = state->coins++;  //bug 3 only add 1 coin instead of 2
+		state->coins = state->coins + 2;  //caught in unittest2.c
 	}
 
 	else if (choice2)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
@@ -781,7 +781,7 @@ int ambassador(struct gameState* state, int handPos, int choice1, int choice2) {
 		printf("Player %d reveals card number: %d\n", currentPlayer, state->hand[currentPlayer][choice1]);
 
 	//increase supply count for choosen card by amount being discarded
-	state->supplyCount[state->hand[currentPlayer][choice1]] += choice1; //bug 5 increase supply count for choosen card 1 by amount being discarded
+	state->supplyCount[state->hand[currentPlayer][choice1]] += choice2; //bug found in unittest3.c
 
 	//each other player gains a copy of revealed card
 	for (i = 0; i < state->numPlayers; i++)
@@ -887,7 +887,7 @@ int mine(struct gameState* state, int handPos, int choice1, int choice2) {
 		return -1;
 	}
 
-	if (choice2 > treasure_map) //bug  10 removed check for curse
+	if (choice2 > treasure_map || choice2 < curse) //bug found in unittest5
 	{
 		return -1;
 	}
@@ -1106,7 +1106,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 		
     case minion:
-		return minion(state, handPos);
+		return minion(state, handPos, choice1, choice2);
 		
     case steward:
       if (choice1 == 1)
