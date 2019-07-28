@@ -56,8 +56,10 @@ runRandomCard3: randomtestcard3
 	./randomtestcard3 &> randomtestcard3.out
 	gcov dominion.c >> randomtestcard3.out
 	cat dominion.c.gcov >> randomcard3.out
+ 
+randomtestresults: runRandomCard1 runRandomCard2 runRandomCard3
 
 all: playdom player 
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out randomtestcard2 testDrawCard testDrawCard.exe
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out randomtestcard1 randomtestcard2 randomtestcard3 testDrawCard testDrawCard.exe
