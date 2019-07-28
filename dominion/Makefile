@@ -32,8 +32,32 @@ runtests: testDrawCard
 
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
+ 
+randomtestcard1:
+	gcc -fprofile-arcs -ftest-coverage -std=c99 dominion.c randomtestcard1.c rngs.c -o randomtestcard1 -lm  -g
+
+runRandomCard1: randomtestcard1
+	./randomtestcard1 &> randomtestcard1.out
+	gcov dominion.c >> randomtestcard1.out
+	cat dominion.c.gcov >> randomcard1.out
+
+randomtestcard2:
+	gcc -fprofile-arcs -ftest-coverage -std=c99 dominion.c randomtestcard2.c rngs.c -o randomtestcard2 -lm  -g
+
+runRandomCard2: randomtestcard2
+	./randomtestcard2 &> randomtestcard2.out
+	gcov dominion.c >> randomtestcard2.out
+	cat dominion.c.gcov >> randomcard2.out
+ 
+randomtestcard3:
+	gcc -fprofile-arcs -ftest-coverage -std=c99 dominion.c randomtestcard3.c rngs.c -o randomtestcard3 -lm  -g
+
+runRandomCard3: randomtestcard3
+	./randomtestcard3 &> randomtestcard3.out
+	gcov dominion.c >> randomtestcard3.out
+	cat dominion.c.gcov >> randomcard3.out
 
 all: playdom player 
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out randomtestcard2 testDrawCard testDrawCard.exe
