@@ -16,7 +16,7 @@ int main() {
 		int numPlayers = rand() % 4;
 		int gameSeed = rand() % 5000;
 		initializeGame(numPlayers, k, gameSeed, &state);
-		result = tributeFunction(&state);
+		result = playTribute(&state);
 	}
 	printf("End Testing tribute()");
 

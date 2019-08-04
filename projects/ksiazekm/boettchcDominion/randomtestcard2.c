@@ -21,7 +21,7 @@ int main() {
 			choice2 = 1;
 		}
 		initializeGame(numPlayers, k, gameSeed, &state);
-		result = minionFunction(&state, handpos, choice1, choice2);
+		result = playMinion(&state, choice1, choice2, handpos);
 
 	}
 	printf("End Testing minion()");

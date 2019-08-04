@@ -19,7 +19,7 @@ void main()
 		choice1 = rand() % 2;
 		initializeGame(numPlayers, k, gameSeed, &state);
 		printf("Testing baron()");
-		result = baronFunction(&state, choice1);
+		result = playBaron(&state, choice1);
 	}
 	printf("End Testing baron()");
 
