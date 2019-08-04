@@ -6,7 +6,7 @@
 char inputChar()
 {
     // TODO: rewrite this function
-    return (rand() % ((126 + 1 - 32)) + 32);
+    return (rand() % (126 + 1 - 32)) + 32;
 }
 
 char *inputString()
